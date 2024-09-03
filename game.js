@@ -1,8 +1,8 @@
 // 遊戲設定
 const config = {
   type: Phaser.AUTO, // 使用 WebGL 或 Canvas，自動選擇
-  width: 800,
-  height: 600,
+  width: 1000,
+  height: 800,
   parent: 'game-container',
   physics: {
     default: 'arcade',
@@ -26,10 +26,10 @@ let cursors;
 
 function preload() {
   // 載入圖片資源
-  this.load.image('sky', 'https://labs.phaser.io/assets/skies/space3.png');
-  this.load.image('ground', 'https://labs.phaser.io/assets/platforms/platform.png');
+  this.load.image('sky', 'background.jpg');
+  this.load.image('ground', 'chshs.png');
   this.load.image('star', 'https://labs.phaser.io/assets/demoscene/star.png');
-  this.load.image('dude', 'https://labs.phaser.io/assets/sprites/phaser-dude.png');
+  this.load.image('dude', 'cat.jpg');
 }
 
 function create() {
