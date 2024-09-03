@@ -3,10 +3,11 @@ const config = {
   type: Phaser.AUTO, // 使用 WebGL 或 Canvas，自動選擇
   width: 800,
   height: 600,
+  parent: 'game-container',
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 300 }, // 垂直方向的重力
+      //gravity: { y: 0 }, // 垂直方向的重力
       debug: false
     }
   },
@@ -41,8 +42,6 @@ function create() {
   // 添加地面和平台
   platforms.create(400, 568, 'ground').setScale(2).refreshBody();
   platforms.create(600, 400, 'ground');
-  platforms.create(50, 250, 'ground');
-  platforms.create(750, 220, 'ground');
 
   // 添加玩家角色
   player = this.physics.add.sprite(100, 450, 'dude');
@@ -67,7 +66,11 @@ function update() {
   }
 
   // 設定玩家跳躍
-  if (cursors.up.isDown && player.body.touching.down) {
-    player.setVelocityY(-330);
+  if (cursors.up.isDown) {
+    player.setVelocityY(-160);
+  } else if (cursors.down.isDown) {
+    player.setVelocityY(160);
+  } else {
+    player.setVelocityY(0);
   }
 }
