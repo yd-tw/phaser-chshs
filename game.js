@@ -1,13 +1,15 @@
-// 遊戲設定
 const config = {
-  type: Phaser.AUTO, // 使用 WebGL 或 Canvas，自動選擇
-  width: 1000,
-  height: 800,
-  parent: 'game-container',
+  type: Phaser.AUTO,
+  scale: {
+    mode: Phaser.Scale.RESIZE,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    parent: 'game-container',
+    width: '100%',
+    height: '100%'
+  },
   physics: {
     default: 'arcade',
     arcade: {
-      //gravity: { y: 0 }, // 垂直方向的重力
       debug: false
     }
   },
@@ -18,23 +20,23 @@ const config = {
   }
 };
 
-// 建立遊戲實例
 const game = new Phaser.Game(config);
 
 let player;
 let cursors;
 
 function preload() {
-  // 載入圖片資源
   this.load.image('sky', 'background.jpg');
   this.load.image('ground', 'chshs.png');
-  this.load.image('star', 'https://labs.phaser.io/assets/demoscene/star.png');
   this.load.image('dude', 'cat.jpg');
 }
 
 function create() {
+  const { width, height } = this.scale;
+
   // 添加背景
-  this.add.image(400, 300, 'sky');
+  const background = this.add.image(0, 0, 'sky').setOrigin(0, 0);
+  background.setDisplaySize(width, height);
 
   // 建立靜態平台群組
   const platforms = this.physics.add.staticGroup();
