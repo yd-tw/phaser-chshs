@@ -1,4 +1,3 @@
-// MainScene.js
 export default class MainScene extends Phaser.Scene {
   constructor() {
     super({ key: 'MainScene' }); // 宣告這個場景的鍵值為 'MainScene'
@@ -58,18 +57,10 @@ export default class MainScene extends Phaser.Scene {
   onPlayerCollideWithHouse(player, building) {
     if (building.name === 'house1') {
       console.log('Player hit house1');
-      this.showHouse1Interface();
+      this.scene.start('House1Scene'); // 切換到House1場景
     } else if (building.name === 'house2') {
       console.log('Player hit house2');
-      this.showHouse2Interface();
+      this.scene.start('House2Scene'); // 切換到House2場景
     }
-  }
-
-  showHouse1Interface() {
-    alert('玩家碰到了 house1');
-  }
-
-  showHouse2Interface() {
-    alert('玩家碰到了 house2');
   }
 }

@@ -1,4 +1,6 @@
-import MainScene from './src/MainScene.js'; // 導入主場景
+import MainScene from './src/MainScene.js';
+import House1Scene from './src/House1Scene.js';
+import House2Scene from './src/House2Scene.js';
 
 const gameConfig = {
   type: Phaser.AUTO,
@@ -15,7 +17,7 @@ const gameConfig = {
       debug: false,
     },
   },
-  scene: MainScene, // 設置為主場景
+  scene: [MainScene, House1Scene, House2Scene],
 };
 
 const game = new Phaser.Game(gameConfig);
