@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phaser 架構模擬</title>
+  <link rel="icon" href="/favicon.ico">
+  <title>中核高中</title>
   <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
   <style>
     #game-container {
@@ -18,10 +19,20 @@
       background: #282c34;
       color: #fff;
     }
+
+    #logo {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      z-index: 10;
+    }
   </style>
 </head>
 
 <body>
+  <img id="logo" src="assets/logo.png" alt="網站Logo">
   <div id="game-container"></div>
   <script type="module" src="./index.js"></script>
 </body>
