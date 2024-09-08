@@ -11,29 +11,34 @@ export default class MainScene extends Phaser.Scene {
 
   create() {
     const { width, height } = this.scale;
-
-    // 添加背景
+  
     const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
-    background.setDisplaySize(width, height);
-
+    const bgScaleX = width / background.width;
+    const bgScaleY = height / background.height;
+    
+    const scale = Math.min(bgScaleX, bgScaleY);
+    background.setScale(scale);
+    background.setPosition(0, 0);
+  
     // 建立靜態平台群組
     this.buildings = this.physics.add.staticGroup();
-
+  
     // 添加房子，並為每個房子設置名稱
     const house1 = this.buildings.create(400, 568, 'building').setName('house1');
     const house2 = this.buildings.create(600, 400, 'building').setName('house2');
-
+  
     // 添加玩家角色
     this.player = this.physics.add.sprite(100, 450, 'player');
     this.player.setBounce(0.2); // 設定彈跳效果
     this.player.setCollideWorldBounds(true); // 防止超出邊界
-
+  
     // 添加玩家與房子間的碰撞
     this.physics.add.collider(this.player, this.buildings, this.onPlayerCollideWithHouse, null, this);
-
+  
     // 設定鍵盤輸入
     this.cursors = this.input.keyboard.createCursorKeys();
   }
+  
 
   update() {
     // 玩家移動邏輯
