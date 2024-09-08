@@ -4,6 +4,7 @@ import House2Scene from './src/House2Scene.js';
 
 const gameConfig = {
   type: Phaser.AUTO,
+  backgroundColor: '#F3ECE0',
   scale: {
     mode: Phaser.Scale.RESIZE,
     autoCenter: Phaser.Scale.CENTER_BOTH,

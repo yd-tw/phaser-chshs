@@ -12,13 +12,17 @@ export default class MainScene extends Phaser.Scene {
   create() {
     const { width, height } = this.scale;
   
-    const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
+    // 添加背景圖片，調整其比例以適應畫布
+    const background = this.add.image(0, 0, 'background').setOrigin(0.5, 0.5);
     const bgScaleX = width / background.width;
     const bgScaleY = height / background.height;
     
+    // 設定縮放比例，並保持圖片不變形
     const scale = Math.min(bgScaleX, bgScaleY);
     background.setScale(scale);
-    background.setPosition(0, 0);
+    
+    // 設定圖片置中對齊畫布
+    background.setPosition(width / 2, height / 2);
   
     // 建立靜態平台群組
     this.buildings = this.physics.add.staticGroup();
@@ -38,6 +42,7 @@ export default class MainScene extends Phaser.Scene {
     // 設定鍵盤輸入
     this.cursors = this.input.keyboard.createCursorKeys();
   }
+  
   
 
   update() {
