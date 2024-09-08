@@ -1,10 +1,10 @@
 export default class MainScene extends Phaser.Scene {
   constructor() {
-    super({ key: 'MainScene' }); // 宣告這個場景的鍵值為 'MainScene'
+    super({ key: 'MainScene' });
   }
 
   preload() {
-    this.load.image('background', 'assets/background.png');
+    this.load.image('background', 'assets/background.jpg');
     this.load.image('building', 'assets/house.png');
     this.load.image('player', 'assets/player.jpg');
   }
