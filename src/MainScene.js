@@ -34,8 +34,8 @@ export default class MainScene extends Phaser.Scene {
     this.buildings.create(mcs2Pos.x, mcs2Pos.y, 'building').setName('house2').setVisible(false).setScale(scale);
 
     // 使用 Player 類別建立玩家角色
-    const playerPos = relativePosition(0.25, 0.8);
-    this.player = new Player(this, playerPos.x, playerPos.y, 'player', scale);
+    const savedPlayerPos = this.registry.get('playerPosition') || relativePosition(0.25, 0.8);
+    this.player = new Player(this, savedPlayerPos.x, savedPlayerPos.y, 'player', scale);
 
     // 添加玩家與房子間的碰撞
     this.physics.add.collider(this.player, this.buildings, this.onPlayerCollideWithHouse, null, this);
@@ -62,6 +62,8 @@ export default class MainScene extends Phaser.Scene {
   }
 
   onPlayerCollideWithHouse(player, building) {
+    this.registry.set('playerPosition', { x: player.x, y: player.y });
+
     if (building.name === 'house1') {
       this.scene.start('House1Scene');
     } else if (building.name === 'house2') {
