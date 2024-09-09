@@ -1,3 +1,5 @@
+import Player from './Player.js';
+
 export default class MainScene extends Phaser.Scene {
   constructor() {
     super({ key: 'MainScene' });
@@ -11,66 +13,57 @@ export default class MainScene extends Phaser.Scene {
 
   create() {
     const { width, height } = this.scale;
-  
-    // 添加背景圖片，調整其比例以適應畫布
-    const background = this.add.image(0, 0, 'background').setOrigin(0.5, 0.5);
-    const bgScaleX = width / background.width;
-    const bgScaleY = height / background.height;
-    
-    // 設定縮放比例，並保持圖片不變形
-    const scale = Math.min(bgScaleX, bgScaleY);
+
+    // 添加背景圖片
+    const background = this.add.image(width / 2, height / 2, 'background');
+    const scale = Math.min(width / background.width, height / background.height);
     background.setScale(scale);
-    
-    // 設定圖片置中對齊畫布
-    background.setPosition(width / 2, height / 2);
-  
-    // 建立靜態平台群組
+
+    const relativePosition = (percentageX, percentageY) => ({
+      x: background.x - background.displayWidth / 2 + background.displayWidth * percentageX,
+      y: background.y - background.displayHeight / 2 + background.displayHeight * percentageY
+    });
+
+    // 建立靜態平台群組並添加房子
     this.buildings = this.physics.add.staticGroup();
-  
-    // 添加房子，並為每個房子設置名稱
-    const house1 = this.buildings.create(400, 568, 'building').setName('house1');
-    const house2 = this.buildings.create(600, 400, 'building').setName('house2');
-  
-    // 添加玩家角色
-    this.player = this.physics.add.sprite(100, 450, 'player');
-    this.player.setBounce(0.2); // 設定彈跳效果
-    this.player.setCollideWorldBounds(true); // 防止超出邊界
-  
+    const house1Pos = relativePosition(0.75, 0.2);
+    const house2Pos = relativePosition(0.95, 0.4);
+    this.buildings.create(house1Pos.x, house1Pos.y, 'building').setName('house1').setScale(scale);
+    this.buildings.create(house2Pos.x, house2Pos.y, 'building').setName('house2').setScale(scale);
+
+    // 使用 Player 類別建立玩家角色
+    const playerPos = relativePosition(0.25, 0.8);
+    this.player = new Player(this, playerPos.x, playerPos.y, 'player', scale);
+
     // 添加玩家與房子間的碰撞
     this.physics.add.collider(this.player, this.buildings, this.onPlayerCollideWithHouse, null, this);
-  
+
     // 設定鍵盤輸入
     this.cursors = this.input.keyboard.createCursorKeys();
+
+    // 創建空氣牆
+    const walls = this.physics.add.staticGroup();
+    const wallup = relativePosition(0.5, 0.2);
+    const walldown = relativePosition(0.5, 0.9);
+    const wallleft = relativePosition(0, 0.5);
+    const wallright = relativePosition(1, 0.5);
+    walls.create(wallup.x, wallup.y, 'building').setVisible(false).setSize(width, 10);
+    walls.create(walldown.x, walldown.y, 'building').setVisible(false).setSize(width, 10);
+    walls.create(wallleft.x, wallleft.y, 'building').setVisible(false).setSize(10, height);
+    walls.create(wallright.x, wallright.y, 'building').setVisible(false).setSize(10, height);
+
+    this.physics.add.collider(this.player, walls);
   }
-  
-  
 
   update() {
-    // 玩家移動邏輯
-    if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-160);
-    } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(160);
-    } else {
-      this.player.setVelocityX(0);
-    }
-
-    if (this.cursors.up.isDown) {
-      this.player.setVelocityY(-160);
-    } else if (this.cursors.down.isDown) {
-      this.player.setVelocityY(160);
-    } else {
-      this.player.setVelocityY(0);
-    }
+    this.player.handleInput(this.cursors);
   }
 
   onPlayerCollideWithHouse(player, building) {
     if (building.name === 'house1') {
-      console.log('Player hit house1');
-      this.scene.start('House1Scene'); // 切換到House1場景
+      this.scene.start('House1Scene');
     } else if (building.name === 'house2') {
-      console.log('Player hit house2');
-      this.scene.start('House2Scene'); // 切換到House2場景
+      this.scene.start('House2Scene');
     }
   }
 }
