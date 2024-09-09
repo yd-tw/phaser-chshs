@@ -28,12 +28,36 @@
       width: 200px;
       z-index: 10;
     }
+
+    #developer-info {
+      position: absolute;
+      right: 5px;
+      bottom: 5px;
+      background: #333;
+      color: #fff;
+      padding: 5px;
+      border-radius: 5px;
+      font-size: 12px;
+    }
+
+    #developer-info a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    #developer-info a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 
 <body>
   <img id="logo" src="assets/logo.png" alt="網站Logo">
   <div id="game-container"></div>
+  <div id="developer-info">
+    <a href="https://www.codecat.tw" target="_blank" rel="noopener noreferrer">Copyright © 2024 CodeCat team.</a>
+     | 版本 beta 0.1.0
+  </div>
   <script type="module" src="./index.js"></script>
 </body>
 
