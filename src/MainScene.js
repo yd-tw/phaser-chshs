@@ -26,10 +26,12 @@ export default class MainScene extends Phaser.Scene {
 
     // 建立靜態平台群組並添加房子
     this.buildings = this.physics.add.staticGroup();
-    const house1Pos = relativePosition(0.75, 0.2);
-    const house2Pos = relativePosition(0.95, 0.4);
-    this.buildings.create(house1Pos.x, house1Pos.y, 'building').setName('house1').setScale(scale);
-    this.buildings.create(house2Pos.x, house2Pos.y, 'building').setName('house2').setScale(scale);
+    const cnc1Pos = relativePosition(0.75, 0.2);
+    const mcs1Pos = relativePosition(0.95, 0.4);
+    const mcs2Pos = relativePosition(0.95, 0.6);
+    this.buildings.create(cnc1Pos.x, cnc1Pos.y, 'building').setName('house1').setVisible(false).setScale(scale);
+    this.buildings.create(mcs1Pos.x, mcs1Pos.y, 'building').setName('house2').setVisible(false).setScale(scale);
+    this.buildings.create(mcs2Pos.x, mcs2Pos.y, 'building').setName('house2').setVisible(false).setScale(scale);
 
     // 使用 Player 類別建立玩家角色
     const playerPos = relativePosition(0.25, 0.8);
