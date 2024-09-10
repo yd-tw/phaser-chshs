@@ -48,6 +48,33 @@
     #developer-info a:hover {
       text-decoration: underline;
     }
+
+    #user-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #f6b056;
+      padding: 5px;
+      border-radius: 10px;
+      border: none;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 20px;
+      z-index: 10;
+    }
+
+    #user-button img {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin-right: 8px;
+    }
+
+    #user-button span {
+      color: #333;
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -58,6 +85,12 @@
     <a href="https://www.codecat.tw" target="_blank" rel="noopener noreferrer">Copyright © 2024 CodeCat team.</a>
      | 版本 beta 0.1.0
   </div>
+
+  <button id="user-button">
+    <img src="assets/default-avatar.png" alt="使用者頭像">
+    <span>未登入</span>
+  </button>
+
   <script type="module" src="./index.js"></script>
 </body>
 
