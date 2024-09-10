@@ -46,7 +46,7 @@ export default class MainScene extends Phaser.Scene {
     // 創建空氣牆
     const walls = this.physics.add.staticGroup();
     const wallup = relativePosition(0.5, 0.2);
-    const walldown = relativePosition(0.5, 0.9);
+    const walldown = relativePosition(0.5, 0.86);
     const wallleft = relativePosition(0, 0.5);
     const wallright = relativePosition(1, 0.5);
     walls.create(wallup.x, wallup.y, 'building').setVisible(false).setSize(width, 10);

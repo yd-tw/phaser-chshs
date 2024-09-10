@@ -13,7 +13,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     this.setCollideWorldBounds(true);
 
     // 初始化玩家速度或其他屬性
-    this.speed = 160;
+    this.speed = 150 * scale;
   }
 
   handleInput(cursors) {
