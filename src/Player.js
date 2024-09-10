@@ -13,21 +13,30 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     this.setCollideWorldBounds(true);
 
     // 初始化玩家速度或其他屬性
-    this.speed = 150 * scale;
+    this.baseSpeed = 150 * scale;
+    this.speed = this.baseSpeed; // 預設速度為 baseSpeed
   }
 
-  handleInput(cursors) {
-    if (cursors.left.isDown) {
+  handleInput(keys) {
+    // 檢測 Shift 按鍵是否被按下，如果按下則加速
+    if (keys.shift.isDown) {
+      this.speed = this.baseSpeed * 2; // 提升速度
+    } else {
+      this.speed = this.baseSpeed; // 恢復到基本速度
+    }
+
+    // 處理方向鍵和 WASD 輸入
+    if (keys.left.isDown || keys.A.isDown) {
       this.setVelocityX(-this.speed);
-    } else if (cursors.right.isDown) {
+    } else if (keys.right.isDown || keys.D.isDown) {
       this.setVelocityX(this.speed);
     } else {
       this.setVelocityX(0);
     }
 
-    if (cursors.up.isDown) {
+    if (keys.up.isDown || keys.W.isDown) {
       this.setVelocityY(-this.speed);
-    } else if (cursors.down.isDown) {
+    } else if (keys.down.isDown || keys.S.isDown) {
       this.setVelocityY(this.speed);
     } else {
       this.setVelocityY(0);

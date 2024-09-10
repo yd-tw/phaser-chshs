@@ -41,7 +41,17 @@ export default class MainScene extends Phaser.Scene {
     this.physics.add.collider(this.player, this.buildings, this.onPlayerCollideWithHouse, null, this);
 
     // 設定鍵盤輸入
-    this.cursors = this.input.keyboard.createCursorKeys();
+    this.keys = this.input.keyboard.addKeys({
+      up: Phaser.Input.Keyboard.KeyCodes.UP,
+      down: Phaser.Input.Keyboard.KeyCodes.DOWN,
+      left: Phaser.Input.Keyboard.KeyCodes.LEFT,
+      right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
+      W: Phaser.Input.Keyboard.KeyCodes.W,
+      A: Phaser.Input.Keyboard.KeyCodes.A,
+      S: Phaser.Input.Keyboard.KeyCodes.S,
+      D: Phaser.Input.Keyboard.KeyCodes.D,
+      shift: Phaser.Input.Keyboard.KeyCodes.SHIFT
+    });
 
     // 創建空氣牆
     const walls = this.physics.add.staticGroup();
@@ -58,7 +68,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   update() {
-    this.player.handleInput(this.cursors);
+    this.player.handleInput(this.keys);
   }
 
   onPlayerCollideWithHouse(player, building) {
