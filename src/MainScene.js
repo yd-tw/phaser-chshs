@@ -73,11 +73,26 @@ export default class MainScene extends Phaser.Scene {
 
   onPlayerCollideWithHouse(player, building) {
     this.registry.set('playerPosition', { x: player.x, y: player.y });
-
-    if (building.name === 'house1') {
-      this.scene.start('House1Scene');
-    } else if (building.name === 'house2') {
-      this.scene.start('House2Scene');
-    }
+  
+    const confirmText = this.add.text(player.x, player.y - 50, `按E進入 ${building.name}`, {
+      font: '16px Arial',
+      fill: '#000000',
+      backgroundColor: '#ffffff'
+    });
+  
+    this.input.keyboard.once('keydown-E', () => {
+      confirmText.destroy();
+      if (building.name === 'house1') {
+        this.scene.start('House1Scene');
+      } else if (building.name === 'house2') {
+        this.scene.start('House2Scene');
+      }
+    });
+  
+    // 設置2秒後自動消失
+    this.time.delayedCall(1000, () => {
+      confirmText.destroy(); // 自動移除提示訊息
+    });
   }
+  
 }
