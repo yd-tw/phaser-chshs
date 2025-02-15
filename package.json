@@ -1,15 +1,12 @@
 {
-  "name": "game",
+  "name": "phaser-chshs",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "live-server --port=8000"
   },
-  "keywords": [],
-  "author": "yd-tw",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "live-server": "^1.2.0"
+    "live-server": "^1.2.2"
   }
 }
