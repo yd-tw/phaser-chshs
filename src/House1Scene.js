@@ -6,7 +6,7 @@ export default class House1Scene extends Phaser.Scene {
 
   preload() {
     // 在這裡載入這個場景需要的資源
-    this.load.image('house1Background', 'assets/house1_background.jpg');
+    this.load.image('house1Background', '/house1_background.jpg');
   }
 
   create() {

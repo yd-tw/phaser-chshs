@@ -6,9 +6,9 @@ export default class MainScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('background', 'assets/background.png');
-    this.load.image('building', 'assets/house.png');
-    this.load.image('player', 'assets/player.jpg');
+    this.load.image('background', '/background.png');
+    this.load.image('building', '/house.png');
+    this.load.image('player', '/player.jpg');
   }
 
   create() {

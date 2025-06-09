@@ -13,7 +13,7 @@ function setCookie(name, value, days) {
 }
 
 // 檢查是否需要顯示更新通知
-const latestVersion = 'beta 0.3.0';
+const latestVersion = '1.0.1';
 const lastVersionNotified = getCookie('lastVersionNotified');
 
 // 顯示更新通知的條件
